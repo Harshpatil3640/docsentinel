@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Phase 0: Setup
+- [x] Phase 0: Setup
 - [ ] Phase 1: Synthetic GST invoice dataset (v0.1)
 - [ ] Phase 2: LLM extraction (v0.2)
 - [ ] Phase 3: Validation rules, tests and CI (v0.3)
