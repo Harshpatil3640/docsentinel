@@ -10,3 +10,11 @@
   - uv: one tool replaces pip, venv and pyenv. `uv.lock` pins exact versions so anyone can rebuild the same environment with `uv sync`.
   - Ollama: runs LLMs locally with no API cost. Models are big, so `OLLAMA_MODELS` controls where they're stored (I put them on D: to save space on C:).
 - Next: Phase 1, the synthetic GST invoice dataset
+
+## 2026-11-17 · Phase 1
+
+- Did: built a GSTIN checksum helper; wrote a generator for 100 synthetic GST invoices with 9 planted problem types; added a dataset card and changelog
+- Error I hit: my counts didn't match the expected output
+- How I fixed it: found and fixed a mistake in the PROBLEMS list; same seed gives the same data
+- What I learned: CGST+SGST for same-state sales and IGST for other states; how a GSTIN checksum catches typos; why a fixed seed makes data reproducible
+- Next: Phase 2, extracting invoice fields with an LLM

@@ -51,6 +51,7 @@ PROBLEMS = [
     "unknown_vendor",
     "bank_account_changed",
     "future_date",
+    "due_before_invoice",
 ]
 
 
@@ -176,6 +177,9 @@ def plant_problem(
         future = REFERENCE_DATE + timedelta(days=rng.randint(10, 90))
         inv["invoice_date"] = future.isoformat()
         inv["due_date"] = (future + timedelta(days=30)).isoformat()
+    elif problem == "due_before_invoice":
+        invoice_day = date.fromisoformat(inv["invoice_date"])
+        inv["due_date"] = (invoice_day - timedelta(days=rng.randint(1, 15))).isoformat()
     return inv
 
 
