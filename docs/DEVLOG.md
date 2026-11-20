@@ -18,3 +18,11 @@
 - How I fixed it: found and fixed a mistake in the PROBLEMS list; same seed gives the same data
 - What I learned: CGST+SGST for same-state sales and IGST for other states; how a GSTIN checksum catches typos; why a fixed seed makes data reproducible
 - Next: Phase 2, extracting invoice fields with an LLM
+
+## 2026-11-20 · Phase 2
+
+- Did: Groq API key in .env (ignored by Git); PDF to text with pdfplumber; LLM extraction into a Pydantic model; Groq and Ollama both work
+- Error I hit: a stray file named BaseChatModel got committed
+- How I fixed it: pasting code into CMD made `>` create a file; removed it with git rm
+- What I learned: structured output forces a fixed JSON shape; the LLM must copy values, not fix them; secrets go in .env, never in code
+- Next: Phase 3, validation rules, tests and CI
