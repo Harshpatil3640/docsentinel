@@ -2,7 +2,7 @@
 
 - [x] Phase 0: Setup
 - [x] Phase 1: Synthetic GST invoice dataset (v0.1)
-- [ ] Phase 2: LLM extraction (v0.2)
+- [x] Phase 2: LLM extraction (v0.2)
 - [ ] Phase 3: Validation rules, tests and CI (v0.3)
 - [ ] Phase 4: Evaluation v1 (v0.4)
 - [ ] Phase 5: LangGraph agent with human review, memory and tracing (v0.5)
