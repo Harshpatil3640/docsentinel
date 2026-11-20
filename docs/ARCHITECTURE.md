@@ -1,13 +1,20 @@
 # Architecture
 
-## Current (v0.2): extraction
+## Current (v0.3): extraction and validation
 
 ```mermaid
 flowchart LR
-    A[Invoice PDF] --> B[parsing.py<br/>pdfplumber: PDF to text]
-    B --> C[extraction.py<br/>prompt + Invoice schema]
-    C <--> D[llm.py<br/>Groq or Ollama, chosen in .env]
-    C --> E[Invoice JSON<br/>schemas.py]
+    A[Invoice PDF] --> B[parsing.py<br/>PDF to text]
+    B --> C[extraction.py<br/>prompt + schema]
+    C <--> D[llm.py<br/>Groq or Ollama]
+    C --> E[Invoice fields]
+    E --> F[rules.py<br/>10 Python checks]
+    G[(vendors.csv)] --> F
+    H[(docsentinel.db<br/>past invoices)] --> F
+    F --> I{decide}
+    I --> J[approve]
+    I --> K[review]
+    I --> L[reject]
 ```
 
 | File | Job |
@@ -16,9 +23,13 @@ flowchart LR
 | `src/docsentinel/schemas.py` | Defines the `Invoice` and `LineItem` fields (Pydantic) |
 | `src/docsentinel/llm.py` | Returns a Groq or Ollama chat model based on `LLM_PROVIDER` |
 | `src/docsentinel/extraction.py` | Sends the text to the model and forces the answer into `Invoice` |
-| `src/docsentinel/__init__.py` | Command line: `uv run docsentinel extract <pdf>` |
-| `src/docsentinel/gstin.py` | GSTIN checksum helpers (used by the generator now, by rules in Phase 3) |
+| `src/docsentinel/rules.py` | Plain-Python checks: GSTIN, tax type, tax math, totals, dates, duplicates, vendor, bank account |
+| `src/docsentinel/db.py` | SQLite file that remembers processed invoices, to catch duplicates |
+| `src/docsentinel/gstin.py` | GSTIN checksum helpers |
+| `src/docsentinel/__init__.py` | Command line: `extract` and `validate` |
+
+The LLM only reads. Every approve, review or reject decision comes from Python rules.
 
 ## Planned
 
-Validate (Python rules) → Decide (approve, review, reject) → Human review → Save, with an MCP server, evaluation and tracing around it. See [ROADMAP.md](ROADMAP.md).
+LangGraph agent with human review and vendor memory (Phase 5), prompt-injection defenses (Phase 6), MCP server (Phase 7). See [ROADMAP.md](ROADMAP.md).

@@ -26,3 +26,11 @@
 - How I fixed it: pasting code into CMD made `>` create a file; removed it with git rm
 - What I learned: structured output forces a fixed JSON shape; the LLM must copy values, not fix them; secrets go in .env, never in code
 - Next: Phase 3, validation rules, tests and CI
+
+## 2026-11-20 · Phase 3
+
+- Did: 10 validation rules, SQLite duplicate check, 27 tests, validate command, CI on GitHub Actions
+- Error I hit: the dataset test failed on INV-0034 (two problems instead of one); test_rules.py was missing
+- How I fixed it: the generator copied a broken invoice as a duplicate, so duplicates now copy only clean ones; created the missing test file
+- What I learned: tests catch bugs in data, not only code; rules give exact, repeatable decisions; CI runs every test on every push
+- Next: Phase 4, measure extraction accuracy on all 100 invoices
