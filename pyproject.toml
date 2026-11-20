@@ -11,6 +11,7 @@ dependencies = [
     "faker>=40.54.0",
     "fpdf2>=2.9.0",
     "langchain-groq>=1.2.1",
+    "langchain-ollama>=1.1.0",
     "pdfplumber>=0.11.10",
     "python-dotenv>=1.2.4",
 ]
