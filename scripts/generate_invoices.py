@@ -289,7 +289,8 @@ def main() -> None:
         inv = make_invoice(number, rng.choice(vendors), buyer_gstin, rng)
         if problem:
             inv = plant_problem(inv, problem, rng, fake, earlier)
-        earlier.append(inv)
+        if problem is None:  # only copy clean invoices as duplicates
+            earlier.append(inv)
         file_name = f"INV-{number:04d}.pdf"
         write_pdf(inv, out / "invoices" / file_name)
         labels.append(
