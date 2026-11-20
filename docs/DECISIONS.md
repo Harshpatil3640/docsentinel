@@ -16,3 +16,9 @@ The model must return exactly the `Invoice` fields with the right types. Bad out
 
 ## D5: The LLM copies values; it never calculates or fixes them
 If an invoice has a wrong total, the model must copy the wrong total so the Python rules (Phase 3) can catch it. An LLM that fixes errors would hide fraud.
+
+## D6: Approval decisions come from Python rules, not the LLM
+Money checks (tax math, totals, GSTIN checksums) are exact and must give the same answer every time. Rules are testable with pytest and can't be talked out of a decision by text hidden in a PDF.
+
+## D7: Two severities: reject and review
+Hard errors (wrong tax, invalid GSTIN, duplicates) are rejected. Fraud signals and unclear cases (unknown vendor, changed bank account) go to a human, because they may be legitimate.

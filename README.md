@@ -1,5 +1,7 @@
 # DocSentinel
 
+![CI](https://github.com/Harshpatil3640/docsentinel/actions/workflows/ci.yml/badge.svg)
+
 An AI agent that checks Indian GST invoices. It extracts the fields, validates tax and business rules, flags fraud signals, asks a human when unsure, and resists prompt-injection attacks. Every claim is measured.
 
 **Status:** work in progress. See the [roadmap](docs/ROADMAP.md).
